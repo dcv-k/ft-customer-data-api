@@ -73,3 +73,10 @@
 /home/chandrabhanu/Desktop/code/ft-customer-data-api/api/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Design.dll
 /home/chandrabhanu/Desktop/code/ft-customer-data-api/api/bin/Debug/net6.0/Mono.TextTemplating.dll
 /home/chandrabhanu/Desktop/code/ft-customer-data-api/api/bin/Debug/net6.0/System.CodeDom.dll
+/home/chandrabhanu/Desktop/code/ft-customer-data-api/api/bin/Debug/net6.0/BCrypt.Net-Next.dll
+/home/chandrabhanu/Desktop/code/ft-customer-data-api/api/bin/Debug/net6.0/IdentityModel.dll
+/home/chandrabhanu/Desktop/code/ft-customer-data-api/api/bin/Debug/net6.0/Microsoft.IdentityModel.Abstractions.dll
+/home/chandrabhanu/Desktop/code/ft-customer-data-api/api/bin/Debug/net6.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/home/chandrabhanu/Desktop/code/ft-customer-data-api/api/bin/Debug/net6.0/Microsoft.IdentityModel.Logging.dll
+/home/chandrabhanu/Desktop/code/ft-customer-data-api/api/bin/Debug/net6.0/Microsoft.IdentityModel.Tokens.dll
+/home/chandrabhanu/Desktop/code/ft-customer-data-api/api/bin/Debug/net6.0/System.IdentityModel.Tokens.Jwt.dll
