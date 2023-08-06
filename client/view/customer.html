@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer</title>
+    <link rel="shortcut icon" href="#">
+</head>
+
+<body>
+    <h1>Customer Link</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody id="table__body"></tbody>
+    </table>
+
+    <script src="https://cdn.jsdelivr.net/npm/handlebars/dist/handlebars.min.js"></script>
+
+    <script id="table-data-template" type="text/x-handlebars-template">
+        {{#each customers}}
+            <tr>
+                <td>
+                    {{this.name}}
+                </td>
+                <td>
+                    {{this.email}}
+                </td>
+                <td>
+                    {{this.phone}}
+                </td>
+            </tr>
+        {{/each}}
+    </script>
+
+    <script>
+        const jwtToken = localStorage.getItem('jwtToken');
+        if (!jwtToken) {
+            window.location.href = '/index.html';
+        } else {
+            fetch('https://127.0.0.1:7076/customer/', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${jwtToken}`
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 401) {
+                        localStorage.removeItem('jwtToken');
+                        window.location.replace('views/Customer.html');
+                    }
+
+                    var templateSource = document.getElementById('table-data-template').innerHTML;
+                    var template = Handlebars.compile(templateSource);
+                    var renderedHtml = template(data);
+                    document.getElementById('table__body').innerHTML = renderedHtml;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+</body>
+
+</html>
