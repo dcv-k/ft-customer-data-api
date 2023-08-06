@@ -6,12 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer</title>
     <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../lib/dataTables/css/dataTables.bootstrap5.min.css">
+
+    <link rel="stylesheet" href="../style/global.css">
+    <link rel="stylesheet" href="../style/customer.css">
 </head>
 
-<body>
-    <h1>Customer List</h1>
+<body class="container">
+    <div id="title">
+        <h1>Customer List</h1>
+    </div>
 
-    <table>
+    <table id="customer-table" class="table table-striped" style="width:100%">
         <thead>
             <tr>
                 <th>Name</th>
@@ -22,6 +29,7 @@
         <tbody id="table__body"></tbody>
     </table>
 
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/handlebars/dist/handlebars.min.js"></script>
 
     <script id="table-data-template" type="text/x-handlebars-template">
@@ -40,6 +48,9 @@
         {{/each}}
     </script>
 
+    <script src="../lib/jquery-3.7.0.js"></script>
+    <script src="../lib/dataTables/js/jquery.dataTables.min.js"></script>
+    <script src="../lib/dataTables/js/dataTables.bootstrap5.min.js"></script>
     <script>
         const jwtToken = localStorage.getItem('jwtToken');
         if (!jwtToken) {
@@ -62,6 +73,8 @@
                     var template = Handlebars.compile(templateSource);
                     var renderedHtml = template(data);
                     document.getElementById('table__body').innerHTML = renderedHtml;
+
+                    new DataTable('#customer-table');
                 })
                 .catch(error => {
                     console.error('Error:', error);
