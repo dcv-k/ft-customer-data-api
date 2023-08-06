@@ -22,18 +22,14 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            fetch('https://127.0.0.1:7076/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username, password })
-            })
+            const url = `https://localhost:7295/user/login?Username=${username}&Password=${password}`;
+
+            fetch(url)
                 .then(response => response.json())
                 .then(data => {
                     if (data.token) {
                         localStorage.setItem('jwtToken', data.token);
-                        window.location.replace('views/Customer.html');
+                        window.location.replace('view/customer.html');
                     } else {
                         console.log('Invalid credentials');
                     }
