@@ -6,6 +6,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.WithOrigins("http://127.0.0.1:8080")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 var connectionString = "Data Source=/home/chandrabhanu/Desktop/customer.db";
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
