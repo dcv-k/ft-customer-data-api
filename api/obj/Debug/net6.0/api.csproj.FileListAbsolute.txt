@@ -80,3 +80,5 @@
 /home/chandrabhanu/Desktop/code/ft-customer-data-api/api/bin/Debug/net6.0/Microsoft.IdentityModel.Logging.dll
 /home/chandrabhanu/Desktop/code/ft-customer-data-api/api/bin/Debug/net6.0/Microsoft.IdentityModel.Tokens.dll
 /home/chandrabhanu/Desktop/code/ft-customer-data-api/api/bin/Debug/net6.0/System.IdentityModel.Tokens.Jwt.dll
+/home/chandrabhanu/Desktop/code/ft-customer-data-api/api/bin/Debug/net6.0/Data/UserData.json
+/home/chandrabhanu/Desktop/code/ft-customer-data-api/api/bin/Debug/net6.0/Newtonsoft.Json.dll
