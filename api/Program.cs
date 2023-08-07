@@ -44,7 +44,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-var connectionString = "Data Source=/home/chandrabhanu/Desktop/customer.db";
+var connectionString = "Data Source=./customer.db";
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlite(connectionString);
