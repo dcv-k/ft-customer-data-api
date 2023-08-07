@@ -27,12 +27,13 @@ public class UserController : ControllerBase
     {
         string passwordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password);
 
-        var user = new User {
+        var user = new User
+        {
             Username = dto.Username,
             Password = passwordHash,
             Type = dto.Type
         };
-        
+
         _dbContext.Users.Add(user);
         _dbContext.SaveChanges();
 
@@ -68,29 +69,30 @@ public class UserController : ControllerBase
     {
         List<Claim> claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Name, user.Username ?? throw new InvalidOperationException("Username cannot be null."))
+            new Claim(ClaimTypes.Name, user.Username),
+            new Claim(ClaimTypes.Role, user.Type ?? throw new InvalidOperationException("Role cannot be null."))
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
-            _configuration.GetSection("AppSettings:Token").Value.PadRight(64)
+            _configuration.GetSection("AppSettings:Key").Value
         ));
 
         var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
 
         var token = new JwtSecurityToken(
             claims: claims,
-            expires: DateTime.Now.AddDays(1), 
-            signingCredentials: cred 
+            expires: DateTime.Now.AddDays(1),
+            signingCredentials: cred
         );
 
         var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
         return jwt;
-    } 
+    }
 
     private bool VerifyPassword(string enteredPassword, string savedPasswordHash)
     {
         return BCrypt.Net.BCrypt.Verify(enteredPassword, savedPasswordHash);
-    } 
+    }
 
-} 
+}

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 [ApiController]
 [Route("customer")]
@@ -15,26 +16,27 @@ public class CustomerController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Policy = "AdminOnly")]
     public IActionResult Index()
     {
         var customers = _dbContext.Customers
         .Select(c => new Customer
-            {
-                Id = c.Id,
-                Name = c.Name,
-                Age = c.Age,
-                EyeColor = c.EyeColor,
-                Gender = c.Gender,
-                Company = c.Company,
-                Email = c.Email,
-                Phone = c.Phone,
-                Address = c.Address,
-                About = c.About,
-                Registered = c.Registered,
-                Latitude = c.Latitude,
-                Longitude = c.Longitude,
-                Tags = c.Tags,
-            })
+        {
+            Id = c.Id,
+            Name = c.Name,
+            Age = c.Age,
+            EyeColor = c.EyeColor,
+            Gender = c.Gender,
+            Company = c.Company,
+            Email = c.Email,
+            Phone = c.Phone,
+            Address = c.Address,
+            About = c.About,
+            Registered = c.Registered,
+            Latitude = c.Latitude,
+            Longitude = c.Longitude,
+            Tags = c.Tags,
+        })
             .ToList();
         return new JsonResult(new { customers });
     }
