@@ -27,7 +27,7 @@ To run the server API on your local machine, follow these steps:
    `dotnet ef database update`
 5. To Seed the database execute following command:  
    `dotnet run seeddata`
-6. Run the server API using the following command:
+6. Run the server API using the following command:  
    `dotnet run`
 
 ## Testing the Application
