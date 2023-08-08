@@ -7,11 +7,13 @@ public class DataSeeder
 {
     private readonly AppDbContext _dbContext;
     private readonly CustomerService _customerService;
+    private readonly UserService _userService;
 
-    public DataSeeder(AppDbContext dbContext, CustomerService customerService)
+    public DataSeeder(AppDbContext dbContext, CustomerService customerService, UserService userService)
     {
         _dbContext = dbContext;
         _customerService = customerService;
+        _userService = userService;
     }
 
     public void Seed()
@@ -39,19 +41,8 @@ public class DataSeeder
                 {
                     foreach (var userDto in userData)
                     {
-                        string passwordHash = BCrypt.Net.BCrypt.HashPassword(userDto.Password);
-
-                        var user = new User
-                        {
-                            Username = userDto.Username,
-                            Password = passwordHash,
-                            Type = userDto.Type
-                        };
-
-                        _dbContext.Users.Add(user);
+                        _userService.RegisterUser(userDto);
                     }
-
-                    _dbContext.SaveChanges();
                 }
             }
         }

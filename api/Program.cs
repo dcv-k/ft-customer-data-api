@@ -54,6 +54,8 @@ builder.Services.AddTransient<DataSeeder>();
 
 builder.Services.AddScoped<CustomerService>();
 
+builder.Services.AddScoped<UserService>();
+
 var app = builder.Build();
 
 if (args.Length == 1 && args[0].ToLower() == "seeddata")
