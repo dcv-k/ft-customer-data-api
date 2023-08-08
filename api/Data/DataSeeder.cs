@@ -8,24 +8,26 @@ public class DataSeeder
     private readonly AppDbContext _dbContext;
     private readonly CustomerService _customerService;
     private readonly UserService _userService;
+    private readonly IConfiguration _configuration;
 
-    public DataSeeder(AppDbContext dbContext, CustomerService customerService, UserService userService)
+    public DataSeeder(IConfiguration configuration, AppDbContext dbContext, CustomerService customerService, UserService userService)
     {
         _dbContext = dbContext;
         _customerService = customerService;
         _userService = userService;
+        _configuration = configuration;
     }
 
     public void Seed()
     {
         if (!_dbContext.Customers.Any())
         {
-            var jsonFilePath = "./Data/CustomerData.json";
-            var accountDataPath = "./Data/AccountData.json";
+            var customerDataPath = _configuration.GetSection("AppSettings:CustomerDataPath").Value;
+            var accountDataPath = _configuration.GetSection("AppSettings:AccountDataPath").Value;
 
-            if (System.IO.File.Exists(jsonFilePath) && System.IO.File.Exists(accountDataPath))
+            if (System.IO.File.Exists(customerDataPath) && System.IO.File.Exists(accountDataPath))
             {
-                List<CustomerDTO> customerData = ReadJSON<CustomerDTO>(jsonFilePath);
+                List<CustomerDTO> customerData = ReadJSON<CustomerDTO>(customerDataPath);
 
                 if (customerData != null)
                 {

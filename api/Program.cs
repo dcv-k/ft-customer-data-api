@@ -6,11 +6,11 @@ using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var configuration = builder.Configuration;
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("4E8A663A6314B8E589F787D170AFA5D1E1407FFFA076D5210FDC0C54E671732D"));
 
 builder.Services.AddAuthentication(options =>
 {
@@ -19,6 +19,8 @@ builder.Services.AddAuthentication(options =>
 })
 .AddJwtBearer(options =>
 {
+    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetSection("AppSettings:Key").Value));
+
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
@@ -38,7 +40,7 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
     {
-        builder.WithOrigins("http://127.0.0.1:8080")
+        builder.WithOrigins(configuration.GetSection("AppSettings:ClientURL").Value)
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
