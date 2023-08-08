@@ -13,86 +13,29 @@ using BCrypt.Net;
 [Route("user")]
 public class UserController : ControllerBase
 {
-    private readonly IConfiguration _configuration;
-    private readonly AppDbContext _dbContext;
+    private readonly UserService _userService;
 
-    public UserController(IConfiguration configuration, AppDbContext dbContext)
+    public UserController(UserService userService)
     {
-        this._configuration = configuration;
-        this._dbContext = dbContext;
+        _userService = userService;
     }
 
     [HttpPost("register", Name = "register")]
     public IActionResult Register(UserDTO dto)
     {
-        string passwordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password);
-
-        var user = new User
-        {
-            Username = dto.Username,
-            Password = passwordHash,
-            Type = dto.Type
-        };
-
-        _dbContext.Users.Add(user);
-        _dbContext.SaveChanges();
-
+        var user = _userService.RegisterUser(dto);
         return Ok(user);
     }
 
     [HttpGet("login", Name = "login")]
-    public IActionResult Login([FromQuery] string Username, string Password)
+    public IActionResult Login([FromQuery] string username, string password)
     {
-        if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
+        var token = _userService.Login(username, password);
+        if (token == null)
         {
-            return BadRequest("Username and password are required.");
+            return BadRequest("Invalid username or password.");
         }
-
-        var user = _dbContext.Users.FirstOrDefault(c => c.Username == Username);
-
-        if (user == null)
-        {
-            return NotFound("User not found.");
-        }
-
-        if (!VerifyPassword(Password, user.Password ?? throw new InvalidOperationException("Password cannot be null.")))
-        {
-            return BadRequest("Invalid password.");
-        }
-
-        string token = CreateToken(user);
 
         return new JsonResult(new { token });
     }
-
-    private string CreateToken(User user)
-    {
-        List<Claim> claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.Name, user.Username),
-            new Claim(ClaimTypes.Role, user.Type ?? throw new InvalidOperationException("Role cannot be null."))
-        };
-
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
-            _configuration.GetSection("AppSettings:Key").Value
-        ));
-
-        var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
-
-        var token = new JwtSecurityToken(
-            claims: claims,
-            expires: DateTime.Now.AddDays(1),
-            signingCredentials: cred
-        );
-
-        var jwt = new JwtSecurityTokenHandler().WriteToken(token);
-
-        return jwt;
-    }
-
-    private bool VerifyPassword(string enteredPassword, string savedPasswordHash)
-    {
-        return BCrypt.Net.BCrypt.Verify(enteredPassword, savedPasswordHash);
-    }
-
 }
