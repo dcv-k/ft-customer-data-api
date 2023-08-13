@@ -54,7 +54,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddTransient<DataSeeder>();
 
-builder.Services.AddScoped<CustomerService>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<ICustomerDAO, CustomerDAO>();
 
 builder.Services.AddScoped<UserService>();
 
