@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/chandrabhanu/Desktop/code/ft-customer-data-api/api/api.csproj": {}
+    "/home/chandrabhanu/ft/ft-customer-data-api/api/api.csproj": {}
   },
   "projects": {
-    "/home/chandrabhanu/Desktop/code/ft-customer-data-api/api/api.csproj": {
+    "/home/chandrabhanu/ft/ft-customer-data-api/api/api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/chandrabhanu/Desktop/code/ft-customer-data-api/api/api.csproj",
+        "projectUniqueName": "/home/chandrabhanu/ft/ft-customer-data-api/api/api.csproj",
         "projectName": "api",
-        "projectPath": "/home/chandrabhanu/Desktop/code/ft-customer-data-api/api/api.csproj",
+        "projectPath": "/home/chandrabhanu/ft/ft-customer-data-api/api/api.csproj",
         "packagesPath": "/home/chandrabhanu/.nuget/packages/",
-        "outputPath": "/home/chandrabhanu/Desktop/code/ft-customer-data-api/api/obj/",
+        "outputPath": "/home/chandrabhanu/ft/ft-customer-data-api/api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/chandrabhanu/.nuget/NuGet/NuGet.Config"
@@ -46,6 +46,14 @@
               "target": "Package",
               "version": "[6.1.0, )"
             },
+            "Microsoft.AspNet.Identity.EntityFramework": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "Microsoft.AspNet.Identity.Owin": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[6.0.4, )"
@@ -71,6 +79,10 @@
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[7.0.9, )"
+            },
+            "Microsoft.Owin.Host.SystemWeb": {
+              "target": "Package",
+              "version": "[4.2.2, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -104,7 +116,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/chandrabhanu/.dotnet/sdk/6.0.412/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/home/chandrabhanu/.dotnet/sdk/6.0.413/RuntimeIdentifierGraph.json"
         }
       }
     }

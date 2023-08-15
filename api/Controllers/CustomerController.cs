@@ -16,7 +16,7 @@ public class CustomerController : ControllerBase
     }
 
     [HttpGet]
-    [Authorize(Policy = "AdminOnly")]
+    [Authorize]
     public IActionResult Index()
     {
         var customers = _customerService.GetCustomers();

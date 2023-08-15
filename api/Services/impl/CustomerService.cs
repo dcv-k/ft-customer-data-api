@@ -18,7 +18,7 @@ public class CustomerService : ICustomerService
 
     public void InsertCustomer(CustomerDTO customerDTO)
     {
-        _customerDAO.Create(customerDTO)
+        _customerDAO.Create(customerDTO);
     }
 
     public List<Customer> GetCustomers()
@@ -29,7 +29,7 @@ public class CustomerService : ICustomerService
     public string UpdateCustomer(CustomerUpdateDTO customerUpdateDTO)
     {
         _customerDAO.Update(customerUpdateDTO);
-        return "Update Successful!"
+        return "Update Successful!";
     }
 
     public string CalculateDistance(string id, string lon, string lat)

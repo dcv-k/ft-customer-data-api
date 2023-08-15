@@ -4,5 +4,5 @@ public interface ICustomerDAO
     List<Customer> Read();
     public Customer Read(string id);
     string Update(CustomerUpdateDTO dto);
-    public List<Customer> Search(string text)
+    public List<Customer> Search(string text);
 }
