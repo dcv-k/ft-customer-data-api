@@ -1,60 +1,45 @@
 using Newtonsoft.Json;
+using BCrypt.Net;
+using System.Collections.Generic;
+using System.Linq;
 
 public class DataSeeder
 {
-    private readonly AppDbContext _dbContext;
+    private readonly ApplicationDbContext _dbContext;
+    private readonly ICustomerService _customerService;
+    private readonly IConfiguration _configuration;
 
-    public DataSeeder(AppDbContext dbContext)
+    public DataSeeder(IConfiguration configuration, ApplicationDbContext dbContext, ICustomerService customerService)
     {
-        this._dbContext = dbContext;
+        _dbContext = dbContext;
+        _customerService = customerService;
+        _configuration = configuration;
     }
 
     public void Seed()
     {
         if (!_dbContext.Customers.Any())
         {
-            var jsonFilePath = "./Data/UserData.json";
-            
-            if (System.IO.File.Exists(jsonFilePath))
+            var customerDataPath = "./Data/SeedSource/CustomerData.json";
+
+            if (System.IO.File.Exists(customerDataPath))
             {
-                string jsonData = System.IO.File.ReadAllText(jsonFilePath);
-                var userData = JsonConvert.DeserializeObject<List<CustomerDTO>>(jsonData);
+                List<CustomerDTO> customerData = ReadJSON<CustomerDTO>(customerDataPath);
 
-                if (userData != null)
+                if (customerData != null)
                 {
-                    foreach (var user in userData)
+                    foreach (var customerDto in customerData)
                     {
-                        var customer = new Customer
-                        {
-                            Id = user._id,
-                            Name = user.name,
-                            Age = user.age,
-                            EyeColor = user.eyeColor ?? "",
-                            Gender = user.gender ?? "",
-                            Company = user.company ?? "",
-                            Email = user.email ?? "",
-                            Phone = user.phone,
-                            Address = new Address
-                            {
-                                Number = user.address.number,
-                                Street = user.address.street,
-                                City = user.address.city,
-                                State = user.address.state,
-                                ZipCode = user.address.zipcode
-                            },
-                            About = user.about ?? "",
-                            Registered = user.registered ?? "",
-                            Latitude = user.latitude,
-                            Longitude = user.longitude,
-                            Tags = user.tags.Select(tagName => new Tag { Name = tagName }).ToList()
-                        };
-
-                        _dbContext.Customers.Add(customer);
+                        _customerService.InsertCustomer(customerDto);
                     }
-
-                    _dbContext.SaveChanges();
                 }
             }
         }
+    }
+
+    public List<T> ReadJSON<T>(string path)
+    {
+        string jsonData = System.IO.File.ReadAllText(path);
+        return JsonConvert.DeserializeObject<List<T>>(jsonData);
     }
 }

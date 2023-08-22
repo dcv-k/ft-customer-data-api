@@ -15,9 +15,9 @@
     <form id="login-form">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text">Username</span>
+                <span class="input-group-text">Email</span>
             </div>
-            <input type="text" id="username" class="form-control" aria-label="Username">
+            <input type="text" id="email" class="form-control" aria-label="Email">
         </div>
 
         <div class="input-group mb-3">
@@ -32,27 +32,39 @@
 
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.getElementById('login-form').addEventListener('submit', function (event) {
+        document.getElementById('login-form').addEventListener('submit', async function (event) {
             event.preventDefault();
 
-            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            const url = `https://localhost:7295/user/login?Username=${username}&Password=${password}`;
+            const loginData = {
+  "email": "user2@example.com",
+  "password": "Test123!"
+};
 
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.token) {
-                        localStorage.setItem('jwtToken', data.token);
-                        window.location.replace('view/customer.html');
-                    } else {
-                        console.log('Invalid credentials');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
+            const url = 'https://localhost:7295/api/Account/Login';
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(loginData)
                 });
+
+                const data = await response.json();
+
+                if (response.ok && data.token) {
+                    localStorage.setItem('jwtToken', data.token);
+                    window.location.replace('view/customer.html');
+                } else {
+                    console.log('Invalid credentials');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
         });
     </script>
 </body>
