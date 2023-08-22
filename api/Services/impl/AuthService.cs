@@ -62,7 +62,7 @@ public class AuthService : IAuthService
 
     private SigningCredentials GetSigningCredentials()
     {
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("JWT:Key").Value));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("JWT:Secret").Value));
 
         return new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
     }

@@ -1,0 +1,17 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #register-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5vh;
+  
+    padding: 5rem;
+    background-color: var(--bg-light);
+    border-radius: 0.5rem;
+  }

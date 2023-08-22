@@ -17,6 +17,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="*" />
     <PackageReference Include="Microsoft.AspNetCore.Cors" Version="*" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="*" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="*" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="*">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

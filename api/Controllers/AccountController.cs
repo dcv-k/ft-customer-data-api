@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/v{version:apiVersion}/[controller]")]
+[ApiVersion("1.0")]
 public class AccountController : ControllerBase
 {
     private readonly UserManager<AppUser> _userManager;

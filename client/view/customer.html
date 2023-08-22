@@ -51,12 +51,13 @@
     <script src="../lib/jquery-3.7.0.js"></script>
     <script src="../lib/dataTables/js/jquery.dataTables.min.js"></script>
     <script src="../lib/dataTables/js/dataTables.bootstrap5.min.js"></script>
+    <script src="../js/const.js"></script>
     <script>
         const jwtToken = localStorage.getItem('jwtToken');
         if (!jwtToken) {
             window.location.href = '/index.html';
         } else {
-            fetch('https://localhost:7295/customer', {
+            fetch(`https://localhost:7295/api/v${API_VER}/customer`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${jwtToken}`

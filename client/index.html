@@ -28,10 +28,17 @@
         </div>
 
         <button class="btn btn-primary" type="submit">Login</button>
+        <p>Or</p>
+        <button class="btn btn-info" onclick="handleRegister()">Register</button>
     </form>
 
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./js/const.js"></script>
     <script>
+        const handleRegister = () => {
+            window.location.replace('view/register.html');
+        }
+
         document.getElementById('login-form').addEventListener('submit', async function (event) {
             event.preventDefault();
 
@@ -39,11 +46,11 @@
             const password = document.getElementById('password').value;
 
             const loginData = {
-  "email": "user2@example.com",
-  "password": "Test123!"
-};
+                email: email,
+                password: password
+            };
 
-            const url = 'https://localhost:7295/api/Account/Login';
+            const url = `https://localhost:7295/api/v${API_VER}/Account/Login`;
 
             try {
                 const response = await fetch(url, {
@@ -57,6 +64,7 @@
                 const data = await response.json();
 
                 if (response.ok && data.token) {
+                    console.log(data.token)
                     localStorage.setItem('jwtToken', data.token);
                     window.location.replace('view/customer.html');
                 } else {

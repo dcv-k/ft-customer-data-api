@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "i+vjTB6qq0w91tZjGA0BBsGw2qQ65SWZZgK5pLbFBn6Z8wEMdoepS4kgyAtwHFyA5LmP+X62HfZOuntT+e+0gg==",
+  "dgSpecHash": "UoAmh93t2vdQkNp8ChVMS3u8jr8BXYB/oPCuEYMqvShzhQ+0smz5AYJoYoi32ETbE8R6b25Iq9QUZwXgW6qLKA==",
   "success": true,
   "projectFilePath": "/home/chandrabhanu/ft/ft-customer-data-api/api/api.csproj",
   "expectedPackageFiles": [
@@ -81,6 +81,7 @@
     "/home/chandrabhanu/.nuget/packages/microsoft.aspnetcore.identity.entityframeworkcore/7.0.10/microsoft.aspnetcore.identity.entityframeworkcore.7.0.10.nupkg.sha512",
     "/home/chandrabhanu/.nuget/packages/microsoft.aspnetcore.identity.ui/7.0.10/microsoft.aspnetcore.identity.ui.7.0.10.nupkg.sha512",
     "/home/chandrabhanu/.nuget/packages/microsoft.aspnetcore.metadata/7.0.10/microsoft.aspnetcore.metadata.7.0.10.nupkg.sha512",
+    "/home/chandrabhanu/.nuget/packages/microsoft.aspnetcore.mvc.versioning/5.1.0/microsoft.aspnetcore.mvc.versioning.5.1.0.nupkg.sha512",
     "/home/chandrabhanu/.nuget/packages/microsoft.aspnetcore.razor.language/6.0.11/microsoft.aspnetcore.razor.language.6.0.11.nupkg.sha512",
     "/home/chandrabhanu/.nuget/packages/microsoft.aspnetcore.webutilities/2.2.0/microsoft.aspnetcore.webutilities.2.2.0.nupkg.sha512",
     "/home/chandrabhanu/.nuget/packages/microsoft.bcl.asyncinterfaces/6.0.0/microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",

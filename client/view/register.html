@@ -7,32 +7,37 @@
     <title>Register</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../style/global.css">
+    <link rel="stylesheet" href="../style/register.css">
 </head>
 
 <body>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6 mt-5">
-                <form id="register-form">
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" id="email" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" id="password" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="roles" class="form-label">Role</label>
-                        <input type="text" id="roles" class="form-control" required>
-                    </div>
-                    <button class="btn btn-primary" type="submit">Register</button>
-                </form>
+    <form id="register-form">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Email</span>
             </div>
+            <input type="email" id="email" class="form-control" required>
         </div>
-    </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Password</span>
+            </div>
+            <input type="password" id="password" class="form-control" aria-label="Password">
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Role</span>
+            </div>
+            <input type="text" id="roles" class="form-control" required>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/const.js"></script>
     <script>
         document.getElementById('register-form').addEventListener('submit', async function (event) {
             event.preventDefault();
@@ -47,7 +52,7 @@
                 roles: roles
             };
 
-            const url = 'https://localhost:7295/api/Account/Register';
+            const url = `https://localhost:7295/api/v${API_VER}/Account/Register`;
 
             try {
                 const response = await fetch(url, {

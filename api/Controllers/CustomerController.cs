@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
 [ApiController]
-[Route("customer")]
+[Route("api/v{version:apiVersion}/[controller]")]
+[ApiVersion("1.0")]
 public class CustomerController : ControllerBase
 {
     private readonly ILogger<CustomerController> _logger;
