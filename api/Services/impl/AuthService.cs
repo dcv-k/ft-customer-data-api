@@ -31,10 +31,10 @@ public class AuthService : IAuthService
 
     private JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials, List<Claim> claims)
     {
-        var jwtSettings = _configuration.GetSection("JWT"); // Update this line
+        var jwtSettings = _configuration.GetSection("JWT");
 
         var token = new JwtSecurityToken(
-            issuer: jwtSettings["Issuer"], // Use indexer to access configuration values
+            issuer: jwtSettings["Issuer"],
             claims: claims,
             expires: DateTime.Now.AddMinutes(15.00),
             signingCredentials: signingCredentials
@@ -47,14 +47,14 @@ public class AuthService : IAuthService
     {
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Name, _user.UserName) // Use ClaimTypes instead of ClaimsTypes
+            new Claim(ClaimTypes.Name, _user.UserName)
         };
 
-        var roles = await _userManager.GetRolesAsync(_user); // Fix typo
+        var roles = await _userManager.GetRolesAsync(_user);
 
         foreach (var role in roles)
         {
-            claims.Add(new Claim(ClaimTypes.Role, role)); // Use Add instead of add
+            claims.Add(new Claim(ClaimTypes.Role, role));
         }
 
         return claims;
