@@ -1,6 +1,8 @@
-public class UserDTO
-{
-    public string Username { get; set; } = null!;
-    public string Password { get; set; } = null!;
-    public string Type { get; set; } = null!;
-}
+using System.ComponentModel.DataAnnotations;
+
+
+    public class UserDTO : LoginUserDTO
+    {
+        public ICollection<string> Roles {get; set;}
+    }
+
