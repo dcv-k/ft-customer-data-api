@@ -1,7 +1,11 @@
-public class CustomerDAO
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+
+public class CustomerDAO : ICustomerDAO
 {
-    private readonly AppDbContext _dbContext;
-    public CustomerDAO(AppDbContext dbContext)
+    private readonly ApplicationDbContext _dbContext;
+    
+    public CustomerDAO(ApplicationDbContext dbContext)
     {
         _dbContext = dbContext;
     }
@@ -64,7 +68,7 @@ public class CustomerDAO
 
     public Customer Read(string id)
     {
-        _dbContext.Customers.FirstOrDefault(c => c.Id == id);
+        var customers = _dbContext.Customers.FirstOrDefault(c => c.Id == id);
         return customers;
     }
 
@@ -96,7 +100,7 @@ public class CustomerDAO
         return customers;
     }
 
-    public string Update(CustomerUpdateDTO dto)
+    public void Update(CustomerUpdateDTO dto)
     {
         var customer = _dbContext.Customers.FirstOrDefault(c => c.Id == dto.Id);
 
@@ -105,7 +109,6 @@ public class CustomerDAO
         customer.Phone = dto.Phone;
 
         _dbContext.SaveChanges();
-
     }
 
     public List<Customer> Search(string text)

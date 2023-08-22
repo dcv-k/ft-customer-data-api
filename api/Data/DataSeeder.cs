@@ -5,16 +5,14 @@ using System.Linq;
 
 public class DataSeeder
 {
-    private readonly AppDbContext _dbContext;
-    private readonly CustomerService _customerService;
-    private readonly UserService _userService;
+    private readonly ApplicationDbContext _dbContext;
+    private readonly ICustomerService _customerService;
     private readonly IConfiguration _configuration;
 
-    public DataSeeder(IConfiguration configuration, AppDbContext dbContext, CustomerService customerService, UserService userService)
+    public DataSeeder(IConfiguration configuration, ApplicationDbContext dbContext, ICustomerService customerService)
     {
         _dbContext = dbContext;
         _customerService = customerService;
-        _userService = userService;
         _configuration = configuration;
     }
 
@@ -22,10 +20,9 @@ public class DataSeeder
     {
         if (!_dbContext.Customers.Any())
         {
-            var customerDataPath = _configuration.GetSection("AppSettings:CustomerDataPath").Value;
-            var accountDataPath = _configuration.GetSection("AppSettings:AccountDataPath").Value;
+            var customerDataPath = "./Data/SeedSource/CustomerData.json";
 
-            if (System.IO.File.Exists(customerDataPath) && System.IO.File.Exists(accountDataPath))
+            if (System.IO.File.Exists(customerDataPath))
             {
                 List<CustomerDTO> customerData = ReadJSON<CustomerDTO>(customerDataPath);
 
@@ -34,16 +31,6 @@ public class DataSeeder
                     foreach (var customerDto in customerData)
                     {
                         _customerService.InsertCustomer(customerDto);
-                    }
-                }
-
-                List<UserDTO> userData = ReadJSON<UserDTO>(accountDataPath);
-
-                if (userData != null)
-                {
-                    foreach (var userDto in userData)
-                    {
-                        _userService.RegisterUser(userDto);
                     }
                 }
             }

@@ -7,13 +7,11 @@ using Microsoft.Extensions.Logging;
 
 public class CustomerService : ICustomerService
 {
-    private readonly ICustomerDAO _customerDAO;
-    private readonly AppDbContext _dbContext;
+    private readonly ICustomerDAO _customerDAO; 
 
     public CustomerService(ICustomerDAO customerDAO)
     {
         _customerDAO = customerDAO;
-        _dbContext = dbContext;
     }
 
     public void InsertCustomer(CustomerDTO customerDTO)
@@ -65,11 +63,11 @@ public class CustomerService : ICustomerService
 
     public List<Customer> SearchCustomers(string text)
     {
-        return _dbContext.Search(text);
+        return _customerDAO.Search(text);
     }
 
     public List<Customer> GetCustomersByZipCode()
     {
-        return _dbContext.ReadOrderByZipCode();
+        return _customerDAO.ReadOrderByZipCode();
     }
 }

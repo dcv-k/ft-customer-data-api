@@ -7,16 +7,15 @@ using Microsoft.AspNetCore.Authorization;
 public class CustomerController : ControllerBase
 {
     private readonly ILogger<CustomerController> _logger;
-    private readonly CustomerService _customerService;
+    private readonly ICustomerService _customerService;
 
-    public CustomerController(ILogger<CustomerController> logger, CustomerService customerService)
+    public CustomerController(ILogger<CustomerController> logger, ICustomerService customerService)
     {
         _logger = logger;
         _customerService = customerService;
     }
 
     [HttpGet]
-    [Authorize]
     public IActionResult Index()
     {
         var customers = _customerService.GetCustomers();
