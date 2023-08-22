@@ -2,43 +2,42 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
+[ApiController]
+[Route("api/[controller]")]
+public class AccountController : ControllerBase
+{
+    private readonly UserManager<AppUser> _userManager;
+    private readonly IAuthService _authService;
 
-    [ApiController]
-    [Route("api/[controller]")]
-    public class AccountController : ControllerBase
-    {
-        private readonly UserManager<AppUser> _userManager;
-    private readonly IAuthService _authService; // Add this line
-
-    public AccountController(UserManager<AppUser> userManager, IAuthService authService) // Add IAuthService parameter
+    public AccountController(UserManager<AppUser> userManager, IAuthService authService)
     {
         _userManager = userManager;
-        _authService = authService; // Assign the injected authService
+        _authService = authService;
     }
 
-        [HttpPost("Register")]
-        public async Task<IActionResult> Register([FromBody] UserDTO dto)
+    [HttpPost("Register")]
+    public async Task<IActionResult> Register([FromBody] UserDTO dto)
+    {
+        if (ModelState.IsValid)
         {
-            if (ModelState.IsValid)
+            var user = new AppUser { UserName = dto.Email, Email = dto.Email };
+            var result = await _userManager.CreateAsync(user, dto.Password);
+
+            if (result.Succeeded)
             {
-                var user = new AppUser { UserName = dto.Email, Email = dto.Email };
-                var result = await _userManager.CreateAsync(user, dto.Password);
-
-                if (result.Succeeded)
-                {
-                    await _userManager.AddToRolesAsync(user, dto.Roles);
-                    return Ok("Registration successful");
-                }
-                else
-                {
-                    return BadRequest(result.Errors);
-                }
+                await _userManager.AddToRolesAsync(user, dto.Roles);
+                return Ok("Registration successful");
             }
-
-            return BadRequest("Invalid registration data");
+            else
+            {
+                return BadRequest(result.Errors);
+            }
         }
 
-        [HttpPost("Login")]
+        return BadRequest("Invalid registration data");
+    }
+
+    [HttpPost("Login")]
     public async Task<IActionResult> Login([FromBody] LoginUserDTO dto)
     {
         if (ModelState.IsValid)
@@ -57,6 +56,6 @@ using System.Threading.Tasks;
 
         return BadRequest("Invalid login data");
     }
-    }
+}
 
 
