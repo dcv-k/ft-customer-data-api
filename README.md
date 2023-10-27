@@ -1,4 +1,4 @@
-# ft-customer-data-api
+# Customer API
 
 This repository contains the code for a client application and a server API. The client application is built using npm, and the server API is built using .NET.
 
@@ -6,29 +6,26 @@ This repository contains the code for a client application and a server API. The
 
 To run the client application on your local machine, follow these steps:
 
-1. Clone this repository to your local machine.
-2. Open a terminal or command prompt.
-3. Navigate to the client directory using the following command:  
+- Clone this repository to your local machine.
+- Open a terminal or command prompt.
+- Navigate to the client directory using the following command:  
    `cd client`
-4. Install the required dependencies using npm:  
+- Install the required dependencies using npm:  
    `npm install`
-5. Start the client application using the following command:  
+- Start the client application using the following command:  
    `npm run start`
 
 ## Running the Server API
 
 To run the server API on your local machine, follow these steps:
 
-1. Clone this repository to your local machine (if you haven't already).
-2. Open a terminal or command prompt.
-3. Navigate to the API directory using the following command:  
-   `cd api`
-4. Create SQL Lite database with following command:  
-   `dotnet ef database update`
-5. To Seed the database execute following command:  
-   `dotnet run seeddata`
-6. Run the server API using the following command:  
-   `dotnet run`
+- Download and install Visual Studio from the official website.  
+- Launch Visual Studio from your applications or Start menu.  
+- Go to `File` > `Open` > `Project/Solution`.  
+- Navigate to the directory where your .NET project is located and select the project file (usually with a `.csproj` extension).  
+- Right-click on the project you want to run in the Solution Explorer and select "Set as Startup Project."  
+- Press `Ctrl + Shift + B` or go to `Build` > `Build Solution` to compile the project.  
+- Press `F5` or go to `Debug` > `Start Debugging` to run the project. If it's a web application, a browser window should open, and your application will start.  
 
 ## Testing the Application
 
