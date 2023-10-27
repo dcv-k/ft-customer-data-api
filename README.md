@@ -2,6 +2,7 @@
 
 This repository contains the code for a client application and a server API. The client application is built using npm, and the server API is built using .NET.
 
+## Installation & Usage  
 ## Running the Client Application
 
 To run the client application on your local machine, follow these steps:
