@@ -1,6 +1,31 @@
 # Customer API
 
-This repository contains the code for a client application and a server API. The client application is built using npm, and the server API is built using .NET.
+This repository contains the code for a client application and a server API. The client application is built using npm, and the server API is built using .NET.  
+
+## Motivation  
+Welcome to our Customer API .NET application. I understand the importance of secure and seamless user authentication, which is why this application features a robust authentication system that prioritizes user data protection. Beyond that, we've streamlined the management of customer information with easy-to-use CRUD operations, allowing you to effortlessly create, read, update, and delete customer records. I believe that technology should work for you, and our application embodies that belief with user authentication and customer CRUD capabilities that exceed expectations. 
+
+## Features  
+### User Authentication System
+- **Secure User Registration:** Register new users with encrypted password storage for enhanced security.
+- **User Login and Logout:** Allow users to log in securely and log out when their session is complete.
+- **Role-Based Access Control:** Implement role-based access control to manage user permissions and access levels.  
+
+### Customer Management (CRUD)
+- **Create Customers:** Easily add new customers to the system with details such as name, contact information, and more.
+- **Read Customer Data:** Access and view customer information, including a searchable and sortable list of customers.
+- **Update Customer Information:** Edit and update customer records, ensuring the latest data is maintained.
+- **Delete Customers:** Remove customer records securely from the database.  
+- **Validation and Error Handling:** Include validation and error handling to ensure data accuracy.
+
+### API Versioning
+- **Versioned Endpoints:** Implement API versioning to maintain backward compatibility while introducing new features and improvements.
+- **API Documentation:** Provide clear and updated API documentation for each version to guide developers and consumers.  
+
+### User-Friendly Interface
+- **Intuitive User Experience:** Offer a user-friendly interface for both user authentication and customer management.
+- **Responsive Design:** Ensure the application is responsive and accessible across various devices and screen sizes.
+- **Customization Options:** Allow users to personalize their profiles and settings.
 
 ## Installation & Usage  
 ### Starting the Client Application
